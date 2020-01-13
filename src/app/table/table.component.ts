@@ -44,12 +44,11 @@ export class TableComponent implements OnInit {
     console.log(firstName)
   }
 
-  getForm(form: NgForm) {
-    console.log(form.value);
-    this.isAdding = false;
+  getNewItem(form) {
+    console.log(form)
   }
   
-  cancel() {
-    this.isAdding = false;
+  cancel(event) {
+    this.isAdding = event;
   }
 }

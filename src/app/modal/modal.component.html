@@ -1,0 +1,49 @@
+<form  #form="ngForm" (ngSubmit)="getNewItem(form)">
+    <h3>Add new item</h3>
+    <div>
+        <input 
+        required
+        placeholder="firstName"
+        class="form-control"
+        name="firstName"
+        pattern="[a-zA-Z ]*"
+        ngModel 
+        #firstName="ngModel">
+        <div class="alert alert-danger" *ngIf="(firstName.touched || firstName.dirty) && firstName.errors">
+            <span *ngIf="firstName.errors.required">Field is required</span>
+            <span *ngIf="firstName.errors.pattern">You can enter only letters</span>
+        </div>
+    </div>
+    <div>
+        <input 
+        placeholder="lastName"
+        class="form-control"
+        name="lastName"
+        pattern="[a-zA-Z ]*"
+        ngModel 
+        required 
+        #lastName="ngModel">
+        <div class="alert alert-danger" *ngIf="(lastName.touched || lastName.dirty) && lastName.errors">
+            <span *ngIf="lastName.errors.required">Field is required</span>
+            <span *ngIf="lastName.errors.pattern">You can enter only letters</span>
+        </div>
+    </div>
+    <div>
+        <input 
+        placeholder="email"
+        class="form-control"
+        name="email" 
+        ngModel 
+        required 
+        #email="ngModel" 
+        email="true">
+        <div class="alert alert-danger" *ngIf="(email.touched || email.dirty) && email.errors">
+            <span *ngIf="email.errors.required">Field is required</span>
+            <span *ngIf="email.errors.email">Please enter a valid email</span>
+        </div>
+    </div>
+    <div class="d-flex justify-content-center">
+        <button [disabled]="!form.valid" type="submit" class="btn btn-primary">Submit</button>
+        <button type="submit" class="btn btn-danger" (click)="cancel()">Cancel</button>
+    </div>
+  </form>
