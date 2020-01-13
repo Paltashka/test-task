@@ -1,0 +1,117 @@
+<div class="table d-flex justify-content-center">
+  <table class="table table-sm">
+    <thead>
+      <tr>
+        <th scope="col">Firstname</th>
+        <th scope="col">Lastname</th>
+        <th scope="col">Email</th>
+        <th scope="col">
+          <button type="button" (click)="openModal()" class="btn btn-secondary">Add new item</button>
+        </th>
+        <th scope="col"></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor='let item of testData'>
+            <td>
+                <input
+                 required
+                 pattern="[a-zA-Z ]*"
+                 class="d-flex justify-content-center"
+                 type="text" 
+                 [(ngModel)]="item.firstname"
+                 name="firstname"
+                 #firstName="ngModel">
+                 <div class="alert alert-danger" *ngIf="firstName.errors">
+                    <span *ngIf="firstName.errors.required">Field is required</span>
+                    <span *ngIf="firstName.errors.pattern">You can enter only letters</span>
+                 </div>
+            </td>
+            <td>
+                <input
+                 class="d-flex justify-content-center"
+                 pattern="[a-zA-Z ]*"
+                 type="text" 
+                 [(ngModel)]="item.lastname" 
+                 name="lastname"
+                 #lastName="ngModel"
+                 required>
+                 <div class="alert alert-danger" *ngIf="firstName.errors">
+                    <span *ngIf="lastName.errors.required">Field is required</span>
+                    <span *ngIf="lastName.errors.pattern">You can enter only letters</span>
+                 </div>
+            </td>
+            <td>
+                <input 
+                class="d-flex justify-content-center" 
+                type="text" 
+                [(ngModel)]="item.email" 
+                name="email"
+                #email="ngModel"
+                email="true"
+                required>
+                <div class="alert alert-danger" *ngIf="email.errors">
+                    <span *ngIf="email.errors.required">Field is required</span>
+                    <span *ngIf="email.errors.email">Please enter a valid email</span>
+                </div>
+            </td>
+            <td></td>
+            <td>
+              <button [disabled]="(firstName.errors || lastName.errors || email.errors)" type="button" (click)="edit(item)" class="btn btn-secondary"><i class="fa fa-edit"></i></button>
+              <button type="button" class="btn btn-danger"><i class="fa fa-trash"></i></button>
+            </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+<div *ngIf="isAdding" class="form">
+    <form  #form="ngForm" (ngSubmit)="getForm(form)">
+        <h3>Add new item</h3>
+        <div>
+            <input 
+            required
+            placeholder="firstName"
+            class="form-control"
+            name="firstName"
+            pattern="[a-zA-Z ]*"
+            ngModel 
+            #firstName="ngModel">
+            <div class="alert alert-danger" *ngIf="(firstName.touched || firstName.dirty) && firstName.errors">
+                <span *ngIf="firstName.errors.required">Field is required</span>
+                <span *ngIf="firstName.errors.pattern">You can enter only letters</span>
+            </div>
+        </div>
+        <div>
+            <input 
+            placeholder="lastName"
+            class="form-control"
+            name="lastName"
+            pattern="[a-zA-Z ]*"
+            ngModel 
+            required 
+            #lastName="ngModel">
+            <div class="alert alert-danger" *ngIf="(lastName.touched || lastName.dirty) && lastName.errors">
+                <span *ngIf="lastName.errors.required">Field is required</span>
+                <span *ngIf="lastName.errors.pattern">You can enter only letters</span>
+            </div>
+        </div>
+        <div>
+            <input 
+            placeholder="email"
+            class="form-control"
+            name="email" 
+            ngModel 
+            required 
+            #email="ngModel" 
+            email="true">
+            <div class="alert alert-danger" *ngIf="(email.touched || email.dirty) && email.errors">
+                <span *ngIf="email.errors.required">Field is required</span>
+                <span *ngIf="email.errors.email">Please enter a valid email</span>
+            </div>
+        </div>
+        <div class="d-flex justify-content-center">
+            <button [disabled]="!form.valid" type="submit" class="btn btn-primary">Submit</button>
+            <button type="submit" class="btn btn-danger" (click)="cancel()">Cancel</button>
+        </div>
+      </form>
+  </div>
