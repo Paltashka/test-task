@@ -1,0 +1,1 @@
+export const ROOT_API = 'http://testappkicationmean.eu-4.evennode.com/table';

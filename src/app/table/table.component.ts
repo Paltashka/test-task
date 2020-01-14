@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { NgForm } from '@angular/forms';
+import { ApiService } from '../services/api.service';
+import { TableItem } from '../interfaces/table.interface';
 
 @Component({
   selector: 'app-table',
@@ -8,46 +9,68 @@ import { NgForm } from '@angular/forms';
 })
 export class TableComponent implements OnInit {
 
-  constructor() { }
+  constructor(private apiService: ApiService) {
+    
+  }
+
+
   isAdding: boolean;
-  testData = [
-    {
-      "firstname": 'Jonh',
-      "lastname": 'Doe',
-      "email": 'johnDoe@email.com'
-    },
-    {
-      "firstname": 'Jonh1',
-      "lastname": 'Doe1',
-      "email": 'johnDoe1@email.com'
-    },
-    {
-      "firstname": 'Jonh2',
-      "lastname": 'Doe2',
-      "email": 'johnDoe2@email.com'
-    },
-    {
-      "firstname": 'Jonh3',
-      "lastname": 'Doe4',
-      "email": 'johnDoe3@email.com'
-    }
-  ]
+  tableItems: Array<TableItem>;
 
   ngOnInit() {
+    this.getTableData()
   }
 
   openModal() {
     this.isAdding = true;
   }
 
-  edit(firstName) {
-    console.log(firstName)
+  getTableData() {
+    this.apiService.getData().subscribe(
+      res => {
+        this.tableItems = res.result;
+      },
+      err => {
+         throw new Error();
+      }
+    )
   }
 
-  getNewItem(form) {
-    console.log(form)
+  edit(data) {
+    console.log(data)
+    this.apiService.updateRow(data).subscribe(
+      res => {
+        this.getTableData()
+      },
+      err => {
+        throw new Error();
+      }
+    )
   }
   
+  deleteRow(id: string) {
+    id.toString()
+    this.apiService.deleteRow(id).subscribe(
+      res => {
+        this.getTableData();
+      },
+      err => {
+        throw new Error();
+      }
+    )
+  }
+
+  addNewData(form) {
+    this.apiService.addNewData(form).subscribe(
+      res => {
+        this.getTableData()
+      },
+      err => {
+        throw new Error();
+      }
+    );
+  }
+
   cancel(event) {
     this.isAdding = event;
   }

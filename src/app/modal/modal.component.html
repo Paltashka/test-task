@@ -5,38 +5,38 @@
         required
         placeholder="firstName"
         class="form-control"
-        name="firstName"
+        name="firstname"
         pattern="[a-zA-Z ]*"
         ngModel 
-        #firstName="ngModel">
-        <div class="alert alert-danger" *ngIf="(firstName.touched || firstName.dirty) && firstName.errors">
-            <span *ngIf="firstName.errors.required">Field is required</span>
-            <span *ngIf="firstName.errors.pattern">You can enter only letters</span>
+        #firstname="ngModel">
+        <div class="alert alert-danger" *ngIf="(firstname.touched || firstname.dirty) && firstname.errors">
+            <span *ngIf="firstname.errors.required">Field is required</span>
+            <span *ngIf="firstname.errors.pattern">You can enter only letters</span>
         </div>
     </div>
     <div>
         <input 
-        placeholder="lastName"
+        placeholder="lastname"
         class="form-control"
-        name="lastName"
+        name="lastname"
         pattern="[a-zA-Z ]*"
         ngModel 
         required 
-        #lastName="ngModel">
-        <div class="alert alert-danger" *ngIf="(lastName.touched || lastName.dirty) && lastName.errors">
-            <span *ngIf="lastName.errors.required">Field is required</span>
-            <span *ngIf="lastName.errors.pattern">You can enter only letters</span>
+        #lastname="ngModel">
+        <div class="alert alert-danger" *ngIf="(lastname.touched || lastname.dirty) && lastname.errors">
+            <span *ngIf="lastname.errors.required">Field is required</span>
+            <span *ngIf="lastname.errors.pattern">You can enter only letters</span>
         </div>
     </div>
     <div>
         <input 
         placeholder="email"
         class="form-control"
-        name="email" 
+        name="email"
         ngModel 
         required 
         #email="ngModel" 
-        email="true">
+        [email]="true">
         <div class="alert alert-danger" *ngIf="(email.touched || email.dirty) && email.errors">
             <span *ngIf="email.errors.required">Field is required</span>
             <span *ngIf="email.errors.email">Please enter a valid email</span>

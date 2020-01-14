@@ -12,7 +12,7 @@
       </tr>
     </thead>
     <tbody>
-      <tr *ngFor='let item of testData'>
+      <tr *ngFor='let item of tableItems'>
             <td>
                 <input
                  required
@@ -58,12 +58,12 @@
             <td></td>
             <td>
               <button [disabled]="(firstName.errors || lastName.errors || email.errors)" type="button" (click)="edit(item)" class="btn btn-secondary"><i class="fa fa-edit"></i></button>
-              <button type="button" class="btn btn-danger"><i class="fa fa-trash"></i></button>
+              <button type="button" (click)="deleteRow(item._id)" class="btn btn-danger"><i class="fa fa-trash"></i></button>
             </td>
       </tr>
     </tbody>
   </table>
 </div>
 <div *ngIf="isAdding" class="form">
- <app-modal (form)="getNewItem($event)" (isAdding)="cancel($event)"></app-modal>
+ <app-modal (form)="addNewData($event)" (isAdding)="cancel($event)"></app-modal>
 </div>
