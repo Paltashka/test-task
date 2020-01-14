@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
-import { ROOT_API } from 'API_CONFIG';
+import { ROOT_API } from 'src/app/api_Config';
 import { Table, TableItem } from '../interfaces/table.interface';
 
 @Injectable({
